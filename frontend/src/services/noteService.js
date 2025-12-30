@@ -14,6 +14,16 @@ export const createNote = async (note) => {
   return response.json();
 };
 
+// Not güncelle
+export const updateNote = async (id, note) => {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(note)
+  });
+  return response.json();
+};
+
 export const deleteNote = async (id) => {
   await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
 };

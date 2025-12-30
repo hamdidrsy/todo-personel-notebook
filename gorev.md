@@ -5,11 +5,11 @@
 **Talep:** Müşteri, mevcut notları düzenleyebilmek istiyor. Şu anda sadece not ekleme ve silme var, güncelleme özelliği eksik.
 
 **Yapılacaklar:**
-- [ ] Backend'e PUT /api/notes/:id endpoint'i ekle
-- [ ] Controller'a updateNote fonksiyonu ekle
-- [ ] Frontend'e noteService.js'e updateNote fonksiyonu ekle
-- [ ] NoteList component'ine "Düzenle" butonu ekle
-- [ ] Düzenleme için modal veya inline edit özelliği ekle
+- [x] Backend'e PUT /api/notes/:id endpoint'i ekle
+- [x] Controller'a updateNote fonksiyonu ekle
+- [x] Frontend'e noteService.js'e updateNote fonksiyonu ekle
+- [x] NoteList component'ine "Düzenle" butonu ekle
+- [x] Düzenleme için modal veya inline edit özelliği ekle
 
 **Kabul Kriterleri:**
 - Kullanıcı bir nota tıklayarak düzenleyebilmeli

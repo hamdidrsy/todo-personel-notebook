@@ -39,6 +39,29 @@ exports.createNote = (req, res) => {
   res.status(201).json(newNote);
 };
 
+// Not Güncelle
+exports.updateNote = (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  let notes = readNotes();
+  const noteIndex = notes.findIndex(note => note.id === parseInt(id));
+
+  if (noteIndex === -1) {
+    return res.status(404).json({ error: 'Not bulunamadı' });
+  }
+
+  notes[noteIndex] = {
+    ...notes[noteIndex],
+    title,
+    content,
+    updatedAt: new Date().toISOString()
+  };
+
+  saveNotes(notes);
+  res.json(notes[noteIndex]);
+}
+
 // Not sil
 exports.deleteNote = (req, res) => {
   let notes = readNotes();

@@ -60,15 +60,78 @@ h1 {
   color: #666;
 }
 
-.note-item button {
-  background: #f44336;
-  color: white;
+.update-button-click {
+  background-color: #5f1111;
+  margin: 0px 5px;
+  color: #ffffff;
   border: none;
   padding: 5px 10px;
-  border-radius: 4px;
+  border-radius: 7px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.note-item button:hover {
-  background: #d32f2f;
+.update-button-click:hover {
+  background-color: #c90202;
+}
+
+/* Düzenleme Formu Stilleri */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.edit-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.cancel-btn {
+  background-color: #757575;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #616161;
+}
+
+.note-buttons {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
 }
