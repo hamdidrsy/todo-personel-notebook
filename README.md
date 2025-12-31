@@ -6,7 +6,7 @@ Basit ve kullanışlı bir kişisel not tutma uygulaması. React frontend ve Exp
 
 ## Proje Hakkında
 
-Bu proje, kullanıcıların kişisel notlarını oluşturabileceği, görüntüleyebileceği ve silebileceği bir web uygulamasıdır. Proje, öğrenme amaçlı tasarlanmış olup yeni özellikler eklenerek geliştirilmeye açıktır.
+Bu proje, kullanıcıların kişisel notlarını oluşturabileceği, görüntüleyebileceği, düzenleyebileceği ve silebileceği bir web uygulamasıdır. Proje, öğrenme amaçlı tasarlanmış olup yeni özellikler eklenerek geliştirilmeye açıktır.
 
 ### Amaç
 
@@ -48,14 +48,10 @@ personal-notebook/
 │
 ├── backend/                    # Sunucu tarafı
 │   ├── src/
-│   │   ├── config/
-│   │   │   └── db.js          # Veritabanı yapılandırması
-│   │   ├── models/
-│   │   │   └── Note.js        # Not veri modeli
 │   │   ├── routes/
 │   │   │   └── noteRoutes.js  # API route tanımları
 │   │   ├── controllers/
-│   │   │   └── noteController.js  # İş mantığı
+│   │   │   └── noteController.js  # İş mantığı (CRUD)
 │   │   └── index.js           # Express sunucu başlatma
 │   ├── data/
 │   │   └── notes.json         # Not verileri (otomatik oluşur)
@@ -68,7 +64,9 @@ personal-notebook/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── NoteForm.js    # Not ekleme formu
-│   │   │   └── NoteList.js    # Not listesi görünümü
+│   │   │   └── NoteList.js    # Not listesi ve düzenleme
+│   │   ├── hooks/
+│   │   │   └── useUrunler.js  # State yönetimi hook'u
 │   │   ├── services/
 │   │   │   └── noteService.js # API çağrıları
 │   │   ├── App.js             # Ana uygulama bileşeni
@@ -183,6 +181,27 @@ Content-Type: application/json
 }
 ```
 
+#### Not Güncelle
+```http
+PUT /notes/:id
+Content-Type: application/json
+
+{
+  "title": "Güncellenmiş Başlık",
+  "content": "Güncellenmiş içerik"
+}
+```
+**Response:**
+```json
+{
+  "id": 1703847123456,
+  "title": "Güncellenmiş Başlık",
+  "content": "Güncellenmiş içerik",
+  "createdAt": "2024-01-15T10:30:00.000Z",
+  "updatedAt": "2024-01-15T12:00:00.000Z"
+}
+```
+
 #### Not Sil
 ```http
 DELETE /notes/:id
@@ -202,6 +221,7 @@ DELETE /notes/:id
 |---------|-------|----------|
 | Not Ekleme | Tamamlandı | Başlık ve içerik ile yeni not oluşturma |
 | Not Listeleme | Tamamlandı | Tüm notları görüntüleme |
+| Not Güncelleme | Tamamlandı | Inline düzenleme ile not güncelleme |
 | Not Silme | Tamamlandı | Tek tıkla not silme |
 | Responsive Tasarım | Tamamlandı | Mobil uyumlu arayüz |
 
@@ -213,7 +233,6 @@ Aşağıdaki özellikler henüz eklenmemiştir ve `gorev.md` dosyasında task ol
 
 | Özellik | Öncelik | Açıklama |
 |---------|---------|----------|
-| Not Güncelleme | Yüksek | Mevcut notları düzenleme |
 | Not Arama | Orta | Başlık veya içerikte arama |
 | Kategoriler | Orta | Notları kategorilere ayırma |
 | Favoriler | Düşük | Notları favorilere ekleme |
@@ -252,9 +271,7 @@ git push origin master
 | Dosya | Açıklama |
 |-------|----------|
 | `src/index.js` | Express uygulamasını başlatır, middleware'leri ve route'ları tanımlar |
-| `src/config/db.js` | Veritabanı bağlantı ayarları (şimdilik JSON dosya yolu) |
-| `src/models/Note.js` | Not veri yapısı şeması |
-| `src/routes/noteRoutes.js` | API endpoint tanımları |
+| `src/routes/noteRoutes.js` | API endpoint tanımları (GET, POST, PUT, DELETE) |
 | `src/controllers/noteController.js` | CRUD işlemlerinin iş mantığı |
 | `.env` | Port ve diğer ortam değişkenleri |
 
@@ -263,10 +280,11 @@ git push origin master
 | Dosya | Açıklama |
 |-------|----------|
 | `src/index.js` | React uygulamasını DOM'a bağlar |
-| `src/App.js` | Ana bileşen, state yönetimi ve child bileşenleri içerir |
+| `src/App.js` | Ana bileşen, hook'tan state alır ve child bileşenlere dağıtır |
 | `src/App.css` | Tüm uygulama stilleri |
 | `src/components/NoteForm.js` | Kontrollü form bileşeni, not ekleme |
-| `src/components/NoteList.js` | Not kartlarını listeleyen bileşen |
+| `src/components/NoteList.js` | Not kartlarını listeler ve inline düzenleme sağlar |
+| `src/hooks/useUrunler.js` | Custom hook - state yönetimi ve CRUD işlemleri |
 | `src/services/noteService.js` | Backend API ile iletişim fonksiyonları |
 
 ---
